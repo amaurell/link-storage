@@ -11,8 +11,7 @@ Gerencie seus links favoritos com facilidade! O **Gerenciador de Links** é uma 
 - [Como Usar](#como-usar)
 - [Instalação Local](#instalação-local)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
+
 
 ---
 
@@ -69,6 +68,6 @@ Para executar o projeto localmente, siga os passos abaixo:
    cd gerenciador-de-links
 
 ## Tecnologias-utilizadas
-   Javascript
-   CSS
-   Localstorage
+   - Javascript
+   - CSS
+   - Localstorage
