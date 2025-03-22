@@ -67,3 +67,8 @@ Para executar o projeto localmente, siga os passos abaixo:
    ```bash
    git clone https://github.com/seu-usuario/gerenciador-de-links.git
    cd gerenciador-de-links
+
+## Tecnologias-utilizadas
+   Javascript
+   CSS
+   Localstorage
