@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Metadados Básicos -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gerencie seus links favoritos com facilidade. Adicione títulos, descrições, URLs e categorias, e organize tudo em um só lugar.">
+  <meta name="keywords" content="gerenciador de links, salvar links, organizar links, bookmark manager, links salvos">
+  <meta name="author" content="Seu Nome ou Empresa">
+  <meta name="robots" content="index, follow">
+  <!-- Open Graph Meta Tags para Redes Sociais -->
+  <meta property="og:title" content="Gerenciador de Links - Organize seus Favoritos">
+  <meta property="og:description" content="Adicione, edite e organize seus links favoritos com descrições, títulos e categorias personalizados.">
+  <meta property="og:image" content="https://seusite.com/imagem-thumbnail.jpg"> <!-- Substitua pela URL de uma imagem relevante -->
+  <meta property="og:url" content="https://seusite.com/gerenciador-de-links">
+  <meta property="og:type" content="website">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gerenciador de Links - Organize seus Favoritos">
+  <meta name="twitter:description" content="Adicione, edite e organize seus links favoritos com descrições, títulos e categorias personalizados.">
+  <meta name="twitter:image" content="https://seusite.com/imagem-thumbnail.jpg"> <!-- Substitua pela URL de uma imagem relevante -->
+  <!-- Título da Página -->
+  <title>Gerenciador de Links - Organize seus Favoritos</title>
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Estilos Customizados -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4 text-gray-800">
+  <!-- Cabeçalho -->
+  <header class="w-full max-w-6xl text-center mb-8 bg-white p-4 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold">Gerenciador de Links</h1>
+    <p class="text-gray-600">Salve seus links favoritos com título, descrição, URL e categoria.</p>
+    <button id="toggleDarkMode" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Alternar Modo Escuro
+    </button>
+  </header>
+  <!-- Layout em Duas Colunas -->
+  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Lado Esquerdo: Busca e Formulário de Inserção (Fixo) -->
+    <section class="bg-white p-6 rounded-lg shadow-md sticky top-4 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <h2 class="text-xl font-semibold mb-4">Buscar e Adicionar Links</h2>
+      <!-- Campo de Busca -->
+      <div class="mb-6">
+        <input type="text" id="searchInput" placeholder="Buscar por título..."
+          class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Formulário de Inserção -->
+      <form id="linkForm" class="space-y-4">
+        <div>
+          <label for="title" class="block text-sm font-medium">Título</label>
+          <input type="text" id="title" name="title" placeholder="Ex: Documentação do TailwindCSS"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="url" class="block text-sm font-medium">Link</label>
+          <input type="url" id="url" name="url" placeholder="Ex: https://tailwindcss.com"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="category" class="block text-sm font-medium">Categoria</label>
+          <select id="category" name="category"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <option value="">Selecione uma categoria</option>
+            <option value="música">Música</option>
+            <option value="tutorial">Tutorial</option>
+            <option value="aula">Aula</option>
+          </select>
+        </div>
+        <div>
+          <label for="description" class="block text-sm font-medium">Descrição</label>
+          <textarea id="description" name="description" rows="3" placeholder="Ex: A melhor ferramenta de CSS utilitário."
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Salvar Link
+        </button>
+      </form>
+    </section>
+    <!-- Lado Direito: Lista de Links Salvos (Com Scroll) -->
+    <section class="bg-white p-6 rounded-lg shadow-md overflow-y-auto max-h-[calc(100vh-8rem)]">
+      <h2 class="text-xl font-semibold mb-4">Links Salvos</h2>
+      <!-- Filtro de Categoria -->
+      <div class="mb-6">
+        <label for="categoryFilter" class="block text-sm font-medium">Filtrar por Categoria</label>
+        <select id="categoryFilter"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="">Todas as Categorias</option>
+          <option value="música">Música</option>
+          <option value="tutorial">Tutorial</option>
+          <option value="aula">Aula</option>
+        </select>
+      </div>
+      <div id="linksList" class="space-y-4"></div>
+    </section>
+  </div>
+  <!-- Rodapé -->
+  <footer class="w-full max-w-6xl mt-8 text-center text-gray-600">
+    <p>&copy; 2025 Gerenciador de Links. Todos os direitos reservados.</p>
+    <p>Desenvolvido por Andre Maurell</a>.</p>
+  </footer>
+  <!-- Script Externo -->
+  <script src="script.js"></script>
+</body>
+</html>
